@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+	      .tab{
+	         width:300px;
+	         height:300px;
+	         background:#ddd;
+	        
+	      }
+	      .tab input{
+	      	width:50px;
+	      	height:30px;
+
+	      }
+
+	       .tab div{
+	      	width:300px;
+	      	height:250px;
+	      	border:1px solid #ddd;
+	        display:none;
+	      }
+	      .on{
+	      	background:red;
+	      }
+		  //tab2
+		    .tab{
+	         width:300px;
+	         height:300px;
+	         background:#ddd;
+	        
+	      }
+	      .tab input{
+	      	width:50px;
+	      	height:30px;
+
+	      }
+
+	       .tab div{
+	      	width:300px;
+	      	height:250px;
+	      	border:1px solid #ddd;
+	        display:none;
+	      }
+	      .on{
+	      	background:red;
+	      }
+	</style>
+	<script>
+	 
+	  class Tab{
+	  	 constructor(id){
+	  	 	this.aBox=document.getElementById(id)
+	  	 	this.aBtn=this.aBox.getElementsByTagName('input')
+	  	 	this.aDiv=this.aBox.getElementsByTagName('div')
+			this.inow=0
+	  	 	this.init()
+	  	 }
+	  	 init(){
+	  	 	for(let i=0;i<this.aBtn.length;i++){
+	  	 		this.aBtn[i].onclick=function(){
+	  	 			this.hide()
+	  	 			this.show(i)
+					this.inow=i
+	  	 		}.bind(this)
+	  	 	}
+
+	  	 }
+	  	 hide(){
+	  	 	for(let i=0;i<this.aBtn.length;i++){
+	  	 		this.aBtn[i].className=''
+	  	 		this.aDiv[i].style.display='none'
+	  	 	}
+	  	 }
+	  	 show(index){
+	  	 	this.aBtn[index].className="on"
+	  	 	this.aDiv[index].style.display='block'
+	  	 }
+	  }
+	     class Autotab extends Tab{
+		    constructor(id){
+			   super(id)
+			   setInterval(this.next.bind(this),1000)
+			}
+             next(){
+			 this.inow++
+			  if(this.inow==this.aBtn.length)this.inow=0
+			  this.hide()
+			  this.show(this.inow)
+			 }		 
+		 }
+		window.onload=function(){
+			 new Tab('tab');
+			 new Autotab('tab2')
+		}
+	</script>
+</head>
+
+<body> 
+ <div id="tab" class="tab">
+ 	   <input type="button" value="aaa" class="on">
+ 	   <input type="button" value="bbb">
+ 	   <input type="button" value="ccc">
+ 	   <div style="display:block">111</div>
+ 	   <div>2222</div>
+ 	   <div>3333</div>
+ </div>
+ <div id="tab2" class="tab">
+ 	   <input type="button" value="aaa" class="on">
+ 	   <input type="button" value="bbb">
+ 	   <input type="button" value="ccc">
+ 	   <div style="display:block">111</div>
+ 	   <div>2222</div>
+ 	   <div>3333</div>
+ </div>
+</body>
+</html>
